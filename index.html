@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>🌸 Kayangan Cinta • Happy Girlfriend Day</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- LOADING -->
+  <div id="loadingScreen">
+    <div class="pixel-loader">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <p class="pixel-font text-[#ffb3e6] text-sm md:text-base glow-pink text-center px-4">LOADING KAYANGAN CINTA...</p>
+    <p class="text-[#7a5a82] text-xs mt-3 pixel-font">✨ for my favorite girl ✨</p>
+  </div>
+
+  <!-- APP -->
+  <div id="app" class="bg-grid">
+
+    <!-- PAGE LANDING -->
+    <div id="page-landing" class="page active">
+      <div class="flex flex-col items-center justify-center min-h-[90vh] text-center gap-5">
+        <div class="relative w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-[#ff6fcf] shadow-2xl shadow-[#ff6fcf44] overflow-hidden bg-[#2d1b33]">
+          <img src="images/cover.png" alt="Kayangan Cinta" class="w-full h-full object-cover" id="landingImage" />
+        </div>
+        <h1 class="pixel-font text-2xl md:text-3xl glow-pink text-[#ffb3e6] leading-relaxed">✧ WELCOME TO <br />KAYANGAN CINTA ✧</h1>
+        <p class="text-[#c9a0d4] text-sm md:text-base max-w-xs px-2">A magical pixel world <br />just for you, my princess 🌸</p>
+        <button onclick="navigateTo('page-login')" class="btn-pixel mt-4"><i class="fa-solid fa-arrow-right mr-2"></i> ENTER</button>
+        <div class="flex gap-3 mt-2 text-[#7a5a82] text-xs pixel-font"><span>✦</span><span>❤</span><span>✦</span></div>
+      </div>
+    </div>
+
+    <!-- PAGE LOGIN -->
+    <div id="page-login" class="page">
+      <div class="flex flex-col items-center justify-center min-h-[85vh] gap-6">
+        <div class="text-center"><span class="text-5xl block mb-2">🔐</span><h2 class="pixel-font text-xl text-[#ffb3e6] glow-pink">LOGIN DULU YAA</h2><p class="text-[#7a5a82] text-sm mt-1">masukin nama panggilan sayangmu</p></div>
+        <div class="w-full max-w-xs">
+          <input type="text" id="loginInput" class="login-input" placeholder="nama panggilan..." autocomplete="off" />
+          <div id="loginError" class="mt-3 text-center min-h-[48px]"></div>
+        </div>
+        <button onclick="handleLogin()" class="btn-pixel gold w-full max-w-xs"><i class="fa-solid fa-key mr-2"></i> BUKA PINTU</button>
+        <button onclick="navigateTo('page-landing')" class="text-[#7a5a82] text-xs pixel-font underline underline-offset-4 mt-2">← kembali</button>
+      </div>
+    </div>
+
+    <!-- PAGE OVERWORLD -->
+    <div id="page-overworld" class="page">
+      <div class="text-center mb-4">
+        <h2 class="pixel-font text-xl text-[#ffb3e6] glow-pink">🗺️ PETUALANGAN CINTA</h2>
+        <p class="text-[#7a5a82] text-xs">jelajahi setiap level untuk kejutan!</p>
+      </div>
+      <!-- Kucing 3D -->
+      <div id="cat-container" class="relative flex justify-center items-center mb-4" style="height:120px;">
+        <div id="cat3d" class="cat-3d" onclick="catBubble()">
+          <div class="cat-body"></div>
+          <div class="cat-head">
+            <div class="cat-ear left"></div>
+            <div class="cat-ear right"></div>
+            <div class="cat-eye left"></div>
+            <div class="cat-eye right"></div>
+            <div class="cat-nose"></div>
+            <div class="cat-whisker left"></div>
+            <div class="cat-whisker right"></div>
+          </div>
+          <div class="cat-tail"></div>
+        </div>
+        <div id="cat-bubble" class="cat-bubble hidden">Meow~!</div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+        <div id="map-games" class="map-node" onclick="goToGames()"><span class="node-icon">🎮</span><span class="node-label">GAMES</span><span class="node-check" id="gamesCheck">✓</span></div>
+        <div id="map-portal" class="map-node locked" onclick="tryOpenPortal()"><span class="node-icon">📸</span><span class="node-label">PORTAL</span><span class="node-check" id="portalCheck">✓</span></div>
+        <div id="map-letter" class="map-node locked" onclick="tryOpenLetter()"><span class="node-icon">💌</span><span class="node-label">SURAT</span><span class="node-check" id="letterCheck">✓</span></div>
+        <div id="map-quiz" class="map-node locked" onclick="tryOpenQuiz()"><span class="node-icon">❓</span><span class="node-label">QUIZ</span><span class="node-check" id="quizCheck">✓</span></div>
+        <div id="map-final" class="map-node locked col-span-2" onclick="tryOpenFinal()"><span class="node-icon">🏆</span><span class="node-label">FINAL</span><span class="node-check" id="finalCheck">✓</span></div>
+      </div>
+      <div class="mt-6 text-center">
+        <p class="text-[#7a5a82] text-xs pixel-font" id="mapHint">✨ Selesaikan 4 game untuk membuka PORTAL</p>
+        <button onclick="navigateTo('page-landing')" class="text-[#7a5a82] text-xs pixel-font underline underline-offset-4 mt-4">← kembali ke awal</button>
+      </div>
+    </div>
+
+    <!-- PAGE GAMES -->
+    <div id="page-games" class="page">
+      <div class="text-center mb-4">
+        <h2 class="pixel-font text-lg text-[#ffb3e6] glow-pink">🎮 GAME CINTA</h2>
+        <p class="text-[#7a5a82] text-xs">Selesaikan <span class="text-[#ffd966]">SEMUA 4 GAME</span> untuk buka PORTAL</p>
+        <div class="flex justify-center gap-4 mt-2 text-xs"><span id="gameWinCounter" class="text-[#ffd966] pixel-font">0/4</span></div>
+      </div>
+
+      <!-- Game 1 -->
+      <div class="game-card mb-4" id="game1">
+        <div class="flex justify-between items-center mb-2"><span class="pixel-font text-[#ffb3e6] text-xs">🎯 TEBAK EMOJI</span><span id="game1Status" class="text-[#7a5a82] text-xs">❌</span></div>
+        <p class="text-[#c9a0d4] text-sm mb-3">Aku lagi <span class="text-[#ffd966]">bahagia</span> banget, pilih emoji yang cocok!</p>
+        <div class="emoji-grid" id="game1Options">
+          <button class="emoji-btn" data-emoji="😊" data-correct="true">😊</button>
+          <button class="emoji-btn" data-emoji="😢">😢</button>
+          <button class="emoji-btn" data-emoji="😡">😡</button>
+          <button class="emoji-btn" data-emoji="😱">😱</button>
+          <button class="emoji-btn" data-emoji="🥰" data-correct="true">🥰</button>
+          <button class="emoji-btn" data-emoji="🤔">🤔</button>
+        </div>
+        <p class="text-[#7a5a82] text-[10px] mt-2 pixel-font">* pilih yang bikin aku senyum</p>
+      </div>
+
+      <!-- Game 2 -->
+      <div class="game-card mb-4" id="game2">
+        <div class="flex justify-between items-center mb-2"><span class="pixel-font text-[#6fcbff] text-xs">✨ KLIK BINTANG</span><span id="game2Status" class="text-[#7a5a82] text-xs">❌</span></div>
+        <p class="text-[#c9a0d4] text-sm mb-3">Klik bintang <span class="text-[#ffd966]">yang berkedip</span> 5 kali!</p>
+        <div class="star-grid" id="starGrid">
+          <button class="star-btn" data-star="0">⭐</button><button class="star-btn" data-star="1">⭐</button><button class="star-btn" data-star="2">⭐</button><button class="star-btn" data-star="3">⭐</button>
+          <button class="star-btn" data-star="4">⭐</button><button class="star-btn" data-star="5">⭐</button><button class="star-btn" data-star="6">⭐</button><button class="star-btn" data-star="7">⭐</button>
+        </div>
+        <div class="flex justify-between mt-2 text-[#7a5a82] text-xs"><span id="starCounter">0 / 5</span><span id="starHint" class="text-[#ffd966]">✨ cari yang berkedip</span></div>
+      </div>
+
+      <!-- Game 3 -->
+      <div class="game-card mb-4" id="game3">
+        <div class="flex justify-between items-center mb-2"><span class="pixel-font text-[#ffd966] text-xs">🧩 COCOKAN</span><span id="game3Status" class="text-[#7a5a82] text-xs">❌</span></div>
+        <p class="text-[#c9a0d4] text-sm mb-3">Klik pasangan <span class="text-[#ffd966]">💖 + 🫶</span> secara berurutan</p>
+        <div class="flex flex-wrap justify-center gap-3" id="matchGrid">
+          <button class="emoji-btn text-3xl px-4 py-2" data-match="heart">💖</button>
+          <button class="emoji-btn text-3xl px-4 py-2" data-match="hand">🫶</button>
+          <button class="emoji-btn text-3xl px-4 py-2" data-match="heart">💖</button>
+          <button class="emoji-btn text-3xl px-4 py-2" data-match="hand">🫶</button>
+          <button class="emoji-btn text-3xl px-4 py-2" data-match="heart">💖</button>
+          <button class="emoji-btn text-3xl px-4 py-2" data-match="hand">🫶</button>
+        </div>
+        <p id="matchStatus" class="text-[#7a5a82] text-[10px] mt-2 pixel-font">klik 💖 lalu 🫶 (urut)</p>
+      </div>
+
+      <!-- Game 4 Memory -->
+      <div class="game-card mb-4" id="game4">
+        <div class="flex justify-between items-center mb-2"><span class="pixel-font text-[#b38bff] text-xs">🃏 MEMORY FLIP</span><span id="game4Status" class="text-[#7a5a82] text-xs">❌</span></div>
+        <p class="text-[#c9a0d4] text-sm mb-3">Cocokkan 4 pasang emoji!</p>
+        <div class="memory-grid" id="memoryGrid"></div>
+        <p id="memoryStatus" class="text-[#7a5a82] text-[10px] mt-2 pixel-font">balik kartu dan temukan pasangan</p>
+      </div>
+
+      <button onclick="checkGameProgress()" class="btn-pixel w-full mt-2"><i class="fa-solid fa-arrow-right mr-2"></i> CEK PROGRES</button>
+      <button onclick="navigateTo('page-overworld')" class="text-[#7a5a82] text-xs pixel-font underline underline-offset-4 mt-3 block text-center w-full">← kembali ke peta</button>
+    </div>
+
+    <!-- PAGE PORTAL -->
+    <div id="page-portal" class="page">
+      <div class="text-center mb-4"><h2 class="pixel-font text-lg text-[#6fcbff] glow-blue">📸 PORTAL FOTO</h2><p class="text-[#7a5a82] text-xs">15 frame kenangan kita ✨</p></div>
+      <div class="portal-container">
+        <div class="portal-frame" id="portalFrame">
+          <div class="portal-loading" id="portalLoading"><div class="spinner"></div><span class="pixel-font text-[#ffb3e6] text-xs">memuat portal...</span></div>
+          <img id="portalImage" src="" alt="foto kenangan" style="display:none;" />
+          <span class="placeholder-icon" id="portalPlaceholder">🌸</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-5 gap-2 mt-4" id="portalThumbs"></div>
+      <div class="text-center mt-2"><button onclick="markPortalVisited()" class="btn-pixel secondary text-xs px-4 py-2">✓ Tandai sudah dilihat</button></div>
+      <button onclick="navigateTo('page-overworld')" class="text-[#7a5a82] text-xs pixel-font underline underline-offset-4 mt-4 block text-center w-full">← kembali ke peta</button>
+    </div>
+
+    <!-- PAGE LETTER -->
+    <div id="page-letter" class="page">
+      <div class="text-center mb-4"><h2 class="pixel-font text-lg text-[#ffd966] glow-yellow">💌 SURAT CINTA</h2><p class="text-[#7a5a82] text-xs">untuk kamu yang paling istimewa</p></div>
+      <div class="letter-box" id="letterBox">
+        <div class="seal">💝</div>
+        <div class="letter-text pixel-font text-[#ffd9f0] text-xs md:text-sm leading-loose" id="letterContent"></div>
+      </div>
+      <div class="flex gap-3 mt-4 justify-center flex-wrap">
+        <button onclick="shuffleLetter()" class="btn-pixel secondary text-xs px-4 py-2"><i class="fa-solid fa-shuffle mr-1"></i> acak</button>
+        <button onclick="markLetterRead()" class="btn-pixel gold text-xs px-4 py-2"><i class="fa-regular fa-check-circle mr-1"></i> tandai dibaca</button>
+      </div>
+      <button onclick="navigateTo('page-overworld')" class="text-[#7a5a82] text-xs pixel-font underline underline-offset-4 mt-4 block text-center w-full">← kembali ke peta</button>
+    </div>
+
+    <!-- PAGE QUIZ -->
+    <div id="page-quiz" class="page">
+      <div class="text-center mb-4">
+        <h2 class="pixel-font text-lg text-[#b38bff] glow-blue">❓ QUIZ CINTA</h2>
+        <p class="text-[#7a5a82] text-xs">Jawab semua pertanyaan tentang kita berdua 💕</p>
+        <p class="text-[#7a5a82] text-[10px] mt-1 pixel-font">(jawab semua dengan benar untuk melanjutkan)</p>
+      </div>
+      <div id="quiz-container" class="space-y-4"></div>
+      <div class="text-center mt-4">
+        <button onclick="checkQuizAnswers()" class="btn-pixel gold text-xs px-6 py-3"><i class="fa-solid fa-check mr-2"></i> CEK JAWABAN</button>
+      </div>
+      <button onclick="navigateTo('page-overworld')" class="text-[#7a5a82] text-xs pixel-font underline underline-offset-4 mt-4 block text-center w-full">← kembali ke peta</button>
+    </div>
+
+    <!-- PAGE FINAL SUPER HEBOH + TOMBOL WA -->
+    <div id="page-final" class="page">
+      <div id="final-container" class="flex flex-col items-center justify-center min-h-[85vh] text-center relative overflow-hidden">
+        <!-- Background -->
+        <div id="final-stars" class="absolute inset-0 pointer-events-none"></div>
+        <div id="final-glow" class="absolute inset-0 pointer-events-none"></div>
+        
+        <div class="relative z-10 perspective-800">
+          <!-- Trofi 3D -->
+          <div id="final-trophy" class="text-8xl md:text-9xl animate-trophy-3d mb-2">🏆</div>
+          
+          <div id="final-title" class="text-2xl md:text-5xl pixel-font text-[#ffb3e6] transform-style-3d animate-float-3d">
+            ✧ KAYANGAN CINTA ✧
+          </div>
+          
+          <div id="final-sub" class="text-xl md:text-3xl pixel-font text-[#ffd966] glow-yellow mt-3 transform-style-3d animate-float-3d-delayed">
+            🎉 SELAMAT! 🎉
+          </div>
+          
+          <div id="final-message" class="text-base md:text-xl pixel-font text-[#c9a0d4] mt-6 max-w-xs mx-auto leading-relaxed animate-pulse-slow">
+            Anda telah menamatkan semua petualangan!<br />
+            <span class="text-[#ff6fcf] glow-pink text-lg md:text-2xl">Happy Girlfriend Day Sweetie</span> 💖
+          </div>
+          
+          <!-- EMOJI BOUNCING -->
+          <div class="flex flex-wrap gap-3 justify-center mt-6">
+            <span class="text-3xl animate-bounce-delayed">💕</span>
+            <span class="text-3xl animate-bounce-delayed-2">✨</span>
+            <span class="text-3xl animate-bounce-delayed">🌸</span>
+            <span class="text-3xl animate-bounce-delayed-2">💗</span>
+            <span class="text-3xl animate-bounce-delayed">🌟</span>
+          </div>
+
+          <!-- TOMBOL WHATSAPP -->
+          <a href="https://wa.me/628980962511?text=bukaaa%20block%20aku%20woi%20di%20wa,%20plis%20jangan%20marah%20%F0%9F%A5%BA%F0%9F%92%96"
+             target="_blank" 
+             class="btn-pixel inline-block mt-6 px-6 py-4 text-sm"
+             style="background: #25D366; border-color: #128C7E; box-shadow: 0 6px 0 #128C7E;">
+             <i class="fa-brands fa-whatsapp mr-2 text-xl"></i> KIRIM KE WA
+          </a>
+          <p class="text-[#7a5a82] text-[10px] mt-2 pixel-font">✨ klik untuk kirim ucapan ke aku via WhatsApp ✨</p>
+        </div>
+
+        <button onclick="navigateTo('page-overworld')" class="btn-pixel mt-6 z-10 relative">
+          <i class="fa-solid fa-arrow-left mr-2"></i> ke peta
+        </button>
+      </div>
+    </div>
+
+    <!-- CUSTOM MODAL -->
+    <div id="customModal" class="modal-overlay hidden">
+      <div class="modal-box pixel-border-modal">
+        <div id="modalIcon" class="text-6xl mb-2">💖</div>
+        <h3 id="modalTitle" class="pixel-font text-[#ffb3e6] text-lg glow-pink">Judul</h3>
+        <p id="modalMessage" class="text-[#c9a0d4] text-sm mt-2 max-w-xs mx-auto leading-relaxed">Pesan</p>
+        <button id="modalButton" class="btn-pixel mt-4 text-xs px-6 py-3">OK</button>
+      </div>
+    </div>
+
+    <!-- AUDIO PLAYER -->
+    <div id="audioPlayer">
+      <i class="fa-solid fa-music text-[#ff6fcf]"></i>
+      <button id="playBtn" onclick="toggleAudio()"><i class="fa-solid fa-play"></i></button>
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" />
+      <audio id="bgAudio" loop src="ZipUpMyFly.mp3" preload="auto"></audio>
+    </div>
+
+    <div id="confettiContainer" class="confetti-container"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
